@@ -18,6 +18,7 @@ func PlotMany(data [][]float64, options ...Option) string {
 	config := configure(config{
 		Offset:    3,
 		Precision: 2,
+		AlwaysY:   true,
 	}, options)
 
 	// Create a deep copy of the input data
@@ -91,6 +92,11 @@ func PlotMany(data [][]float64, options ...Option) string {
 		Text  string
 		Color AnsiColor
 	}
+
+	if rows == 0 && config.AlwaysY {
+		rows = config.Height
+	}
+
 	plot := make([][]cell, rows+1)
 
 	// initialise empty 2D grid
@@ -127,6 +133,10 @@ func PlotMany(data [][]float64, options ...Option) string {
 	if config.ValueFormatter == nil {
 		maxNumLength = len(fmt.Sprintf("%0.*f", precision, maximum))
 		minNumLength = len(fmt.Sprintf("%0.*f", precision, minimum))
+	}
+
+	if intmax2 == 0 && config.AlwaysY {
+		intmax2 = config.Height
 	}
 
 	// calculate label magnitudes and the length when formatted using the ValueFormatter

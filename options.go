@@ -22,6 +22,7 @@ type config struct {
 	SeriesColors           []AnsiColor
 	SeriesLegends          []string
 	ValueFormatter         NumberFormatter
+	AlwaysY                bool
 }
 
 type NumberFormatter func(float64) string
@@ -132,5 +133,12 @@ func SeriesLegends(text ...string) Option {
 func ValueFormatter(f NumberFormatter) Option {
 	return optionFunc(func(c *config) {
 		c.ValueFormatter = f
+	})
+}
+
+// AxisColor sets the axis color.
+func AlwaysY(ay bool) Option {
+	return optionFunc(func(c *config) {
+		c.AlwaysY = ay
 	})
 }

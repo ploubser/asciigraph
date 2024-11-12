@@ -16,15 +16,15 @@ func TestPlot(t *testing.T) {
 
 		{
 			[]float64{1, 1, 1, 1, 1},
-			nil,
+			[]Option{AlwaysY(false)},
 			` 1.00 ┼────`},
 		{
 			[]float64{0, 0, 0, 0, 0},
-			nil,
+			[]Option{AlwaysY(false)},
 			` 0.00 ┼────`},
 		{
 			[]float64{2, 1, 1, 2, -2, 5, 7, 11, 3, 7, 1},
-			nil,
+			[]Option{AlwaysY(false)},
 			`
  11.00 ┤      ╭╮
  10.00 ┤      ││
@@ -42,7 +42,7 @@ func TestPlot(t *testing.T) {
  -2.00 ┤   ╰╯`},
 		{
 			[]float64{2, 1, 1, 2, -2, 5, 7, 11, 3, 7, 4, 5, 6, 9, 4, 0, 6, 1, 5, 3, 6, 2},
-			[]Option{Caption("Plot using asciigraph.")},
+			[]Option{Caption("Plot using asciigraph."), AlwaysY(false)},
 			`
  11.00 ┤      ╭╮
  10.00 ┤      ││
@@ -61,7 +61,7 @@ func TestPlot(t *testing.T) {
         Plot using asciigraph.`},
 		{
 			[]float64{.2, .1, .2, 2, -.9, .7, .91, .3, .7, .4, .5},
-			[]Option{Caption("Plot using asciigraph.")},
+			[]Option{Caption("Plot using asciigraph."), AlwaysY(false)},
 			`
   2.00 ┤  ╭╮ ╭╮
   0.55 ┼──╯│╭╯╰───
@@ -69,7 +69,7 @@ func TestPlot(t *testing.T) {
         Plot using asciigraph.`},
 		{
 			[]float64{2, 1, 1, 2, -2, 5, 7, 11, 3, 7, 1},
-			[]Option{Height(4), Offset(3)},
+			[]Option{Height(4), Offset(3), AlwaysY(false)},
 			`
  11.00 ┤      ╭╮
   7.75 ┤    ╭─╯│╭╮
@@ -78,7 +78,7 @@ func TestPlot(t *testing.T) {
  -2.00 ┤   ╰╯`},
 		{
 			[]float64{.453, .141, .951, .251, .223, .581, .771, .191, .393, .617, .478},
-			nil,
+			[]Option{AlwaysY(false)},
 			`
  0.95 ┤ ╭╮
  0.85 ┤ ││  ╭╮
@@ -92,7 +92,7 @@ func TestPlot(t *testing.T) {
 
 		{
 			[]float64{.01, .004, .003, .0042, .0083, .0033, 0.0079},
-			nil,
+			[]Option{AlwaysY(false)},
 			`
  0.010 ┼╮
  0.009 ┤│
@@ -105,7 +105,7 @@ func TestPlot(t *testing.T) {
 
 		{
 			[]float64{192, 431, 112, 449, -122, 375, 782, 123, 911, 1711, 172},
-			[]Option{Height(10)},
+			[]Option{Height(10), AlwaysY(false)},
 			`
  1711 ┤        ╭╮
  1528 ┤        ││
@@ -119,8 +119,23 @@ func TestPlot(t *testing.T) {
    61 ┤   ││
  -122 ┤   ╰╯`},
 		{
+			[]float64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			[]Option{Height(10), AlwaysY(true)},
+			`
+ 0.00 ┤
+ 0.00 ┤
+ 0.00 ┤
+ 0.00 ┤
+ 0.00 ┤
+ 0.00 ┤
+ 0.00 ┤
+ 0.00 ┤
+ 0.00 ┤
+ 0.00 ┤
+ 0.00 ┼──────────`},
+		{
 			[]float64{0.3189989805, 0.149949026, 0.30142492354, 0.195129182935, 0.3142492354, 0.1674974513, 0.3142492354, 0.1474974513, 0.3047974513},
-			[]Option{Width(30), Height(5), Caption("Plot with custom height & width.")},
+			[]Option{Width(30), Height(5), Caption("Plot with custom height & width."), AlwaysY(false)},
 			`
  0.32 ┼╮            ╭─╮     ╭╮     ╭
  0.29 ┤╰╮    ╭─╮   ╭╯ │    ╭╯│     │
@@ -135,7 +150,7 @@ func TestPlot(t *testing.T) {
 				0, 0, 0, 0, 1.5, 0, 0, -0.5, 8, -3, 0, 0, 1, 2, 1, 0, 0, 0, 0,
 				0, 0, 0, 0, 1.5, 0, 0, -0.5, 10, -3, 0, 0, 1, 2, 1, 0, 0, 0, 0,
 			},
-			[]Option{Offset(10), Height(10), Caption("I'm a doctor, not an engineer.")},
+			[]Option{Offset(10), Height(10), Caption("I'm a doctor, not an engineer."), AlwaysY(false)},
 			`
      10.00    ┤                                             ╭╮
       8.70    ┤       ╭╮                                    ││
@@ -151,7 +166,7 @@ func TestPlot(t *testing.T) {
                             I'm a doctor, not an engineer.`},
 		{
 			[]float64{-5, -2, -3, -4, 0, -5, -6, -7, -8, 0, -9, -3, -5, -2, -9, -3, -1},
-			nil,
+			[]Option{AlwaysY(false)},
 			`
   0.00 ┤   ╭╮   ╭╮
  -1.00 ┤   ││   ││     ╭
@@ -165,7 +180,7 @@ func TestPlot(t *testing.T) {
  -9.00 ┤         ╰╯  ╰╯`},
 		{
 			[]float64{-0.000018527, -0.021, -.00123, .00000021312, -.0434321234, -.032413241234, .0000234234},
-			[]Option{Height(5), Width(45)},
+			[]Option{Height(5), Width(45), AlwaysY(false)},
 			`
   0.000 ┼─╮           ╭────────╮                    ╭
  -0.008 ┤ ╰──╮     ╭──╯        ╰─╮                ╭─╯
@@ -175,7 +190,7 @@ func TestPlot(t *testing.T) {
  -0.042 ┤                            ╰───╯`},
 		{
 			[]float64{57.76, 54.04, 56.31, 57.02, 59.5, 52.63, 52.97, 56.44, 56.75, 52.96, 55.54, 55.09, 58.22, 56.85, 60.61, 59.62, 59.73, 59.93, 56.3, 54.69, 55.32, 54.03, 50.98, 50.48, 54.55, 47.49, 55.3, 46.74, 46, 45.8, 49.6, 48.83, 47.64, 46.61, 54.72, 42.77, 50.3, 42.79, 41.84, 44.19, 43.36, 45.62, 45.09, 44.95, 50.36, 47.21, 47.77, 52.04, 47.46, 44.19, 47.22, 45.55, 40.65, 39.64, 37.26, 40.71, 42.15, 36.45, 39.14, 36.62},
-			[]Option{Width(-10), Height(-10), Offset(-1)},
+			[]Option{Width(-10), Height(-10), Offset(-1), AlwaysY(false)},
 			`
  60.61 ┤             ╭╮ ╭╮
  59.60 ┤   ╭╮        │╰─╯│
@@ -204,7 +219,7 @@ func TestPlot(t *testing.T) {
  36.45 ┤                                                        ╰╯╰`},
 		{
 			[]float64{2, 1, 1, 2, -2, 5, 7, 11, 3, 7, 4, 5, 6, 9, 4, 0, 6, 1, 5, 3, 6, 2},
-			[]Option{LowerBound(-3), UpperBound(13)},
+			[]Option{LowerBound(-3), UpperBound(13), AlwaysY(false)},
 			` 13.00 ┤
  12.00 ┤
  11.00 ┤      ╭╮
@@ -224,7 +239,7 @@ func TestPlot(t *testing.T) {
  -3.00 ┤`},
 		{
 			[]float64{2, 1, 1, 2, -2, 5, 7, 11, 3, 7, 4, 5, 6, 9, 4, 0, 6, 1, 5, 3, 6, 2},
-			[]Option{LowerBound(0), UpperBound(3)},
+			[]Option{LowerBound(0), UpperBound(3), AlwaysY(false)},
 			` 11.00 ┤      ╭╮
  10.00 ┤      ││
   9.00 ┤      ││    ╭╮
@@ -242,15 +257,15 @@ func TestPlot(t *testing.T) {
 
 		{
 			[]float64{1, 1, math.NaN(), 1, 1},
-			nil,
+			[]Option{AlwaysY(false)},
 			` 1.00 ┼─╴╶─`},
 		{
 			[]float64{math.NaN(), 1},
-			nil,
+			[]Option{AlwaysY(false)},
 			` 1.00 ┤╶`},
 		{
 			[]float64{0, 0, 1, 1, math.NaN(), math.NaN(), 3, 3, 4},
-			nil,
+			[]Option{AlwaysY(false)},
 			`
  4.00 ┤       ╭
  3.00 ┤     ╶─╯
@@ -259,7 +274,7 @@ func TestPlot(t *testing.T) {
  0.00 ┼─╯`},
 		{
 			[]float64{.1, .2, .3, math.NaN(), .5, .6, .7, math.NaN(), math.NaN(), .9, 1},
-			nil,
+			[]Option{AlwaysY(false)},
 			`
  1.00 ┤         ╭
  0.90 ┤        ╶╯
@@ -273,7 +288,7 @@ func TestPlot(t *testing.T) {
  0.10 ┼╯`},
 		{
 			[]float64{-0.000018527, -0.021, -.00123, .00000021312, -.0434321234, -.032413241234, .0000234234},
-			[]Option{Height(5), Width(45), Precision(5)},
+			[]Option{Height(5), Width(45), Precision(5), AlwaysY(false)},
 			`
   0.000023 ┼─╮           ╭────────╮                    ╭
  -0.008467 ┤ ╰──╮     ╭──╯        ╰─╮                ╭─╯
@@ -284,19 +299,19 @@ func TestPlot(t *testing.T) {
 
 		{
 			[]float64{math.NaN(), 1},
-			[]Option{Caption("color test"), CaptionColor(Red), AxisColor(Green), LabelColor(Blue)},
+			[]Option{Caption("color test"), CaptionColor(Red), AxisColor(Green), LabelColor(Blue), AlwaysY(false)},
 			`
 \x1b[94m 1.00\x1b[0m \x1b[32m┤\x1b[0m╶
        \x1b[91mcolor test\x1b[0m`},
 		{
 			[]float64{.02, .03, .02},
-			nil,
+			[]Option{AlwaysY(false)},
 			`
  0.030 ┤╭╮
  0.020 ┼╯╰`},
 		{
 			[]float64{.2, .3, .1, .3},
-			nil,
+			[]Option{AlwaysY(false)},
 			`
  0.30 ┤╭╮╭
  0.20 ┼╯││
@@ -305,7 +320,7 @@ func TestPlot(t *testing.T) {
 			[]float64{70 * 1024 * 1024 * 1024, 90 * 1024 * 1024 * 1024, 80 * 1024 * 1024 * 1024, 2 * 1024 * 1024 * 1024},
 			[]Option{Height(5), Width(45), ValueFormatter(func(v float64) string {
 				return fmt.Sprintf("%.2f Foo", v/1024/1024/1024)
-			})},
+			}), AlwaysY(false)},
 			` 89.77 Foo ┤      ╭──────────────────────╮
  72.22 Foo ┼──────╯                      ╰──╮
  54.66 Foo ┤                                ╰───╮
@@ -322,7 +337,7 @@ func TestPlot(t *testing.T) {
 			expected := strings.Replace(strings.TrimPrefix(c.expected, "\n"), `\x1b`, "\x1b", -1)
 			actual := Plot(c.data, c.opts...)
 			if actual != expected {
-				conf := configure(config{}, c.opts)
+				conf := configure(config{AlwaysY: false}, c.opts)
 				t.Errorf("Plot(%f, %#v)", c.data, conf)
 				t.Logf("expected:\n%s\n", expected)
 			}
@@ -357,7 +372,7 @@ func TestPlotMany(t *testing.T) {
 			` 0.00 ┼╶╶`},
 		{
 			[][]float64{{0, 1, 0}, {2, 3, 4, 3, 2}, {4, 5, 6, 7, 6, 5, 4}},
-			[]Option{Width(21), Caption("interpolation test")},
+			[]Option{Width(21), Caption("interpolation test"), AlwaysY(false)},
 			`
  7.00 ┤        ╭──╮
  6.00 ┤    ╭───╯  ╰───╮
@@ -371,15 +386,15 @@ func TestPlotMany(t *testing.T) {
 
 		{
 			[][]float64{{0, 0}, {math.NaN(), 0}},
-			[]Option{SeriesColors(Red)},
+			[]Option{SeriesColors(Red), AlwaysY(false)},
 			" 0.00 ┼╶"},
 		{
 			[][]float64{{0, 0}, {math.NaN(), 0}},
-			[]Option{SeriesColors(Default, Red)},
+			[]Option{SeriesColors(Default, Red), AlwaysY(false)},
 			" 0.00 ┼\x1b[91m╶\x1b[0m"},
 		{
 			[][]float64{{math.NaN(), 0, 2}, {0, 2}},
-			[]Option{SeriesColors(Red, Red)},
+			[]Option{SeriesColors(Red, Red), AlwaysY(false)},
 			`
  2.00 ┤\x1b[91m╭╭\x1b[0m
  1.00 ┤\x1b[91m││\x1b[0m
@@ -387,7 +402,7 @@ func TestPlotMany(t *testing.T) {
 		{
 			[][]float64{{0, 1, 0}, {2, 3, 4, 3, 2}},
 			[]Option{SeriesColors(Red, Blue), SeriesLegends("Red", "Blue"),
-				Caption("legends with caption test")},
+				Caption("legends with caption test"), AlwaysY(false)},
 			`
  4.00 ┤ [94m╭╮[0m
  3.00 ┤[94m╭╯╰╮[0m
